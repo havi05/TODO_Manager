@@ -1,10 +1,10 @@
 @tool
 extends EditorPlugin
 
-const DockScene := preload("res://addons/Todo_Manager/UI/Dock.tscn")
-const Dock := preload("res://addons/Todo_Manager/Dock.gd")
-const Todo := preload("res://addons/Todo_Manager/todo_class.gd")
-const TodoItem := preload("res://addons/Todo_Manager/todoItem_class.gd")
+const DockScene := preload("./UI/Dock.tscn")
+const Dock := preload("./Dock.gd")
+const Todo := preload("./todo_class.gd")
+const TodoItem := preload("./todoItem_class.gd")
 
 var _dockUI : Dock
 

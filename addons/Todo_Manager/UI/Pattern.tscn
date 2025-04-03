@@ -3,11 +3,12 @@
 [ext_resource type="Script" path="res://addons/Todo_Manager/Pattern.gd" id="1"]
 
 [node name="Pattern" type="HBoxContainer"]
+size_flags_horizontal = 3
 script = ExtResource("1")
 
 [node name="LineEdit" type="LineEdit" parent="."]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 expand_to_text_length = true
 
 [node name="RemoveButton" type="Button" parent="."]

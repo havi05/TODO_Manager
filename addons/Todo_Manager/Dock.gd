@@ -4,14 +4,36 @@ extends Control
 #signal tree_built # used for debugging
 enum { CASE_INSENSITIVE, CASE_SENSITIVE }
 
-const Project := preload("res://addons/Todo_Manager/Project.gd")
-const Current := preload("res://addons/Todo_Manager/Current.gd")
+const Project := preload("./Project.gd")
+const Current := preload("./Current.gd")
 
-const Todo := preload("res://addons/Todo_Manager/todo_class.gd")
-const TodoItem := preload("res://addons/Todo_Manager/todoItem_class.gd")
-const ColourPicker := preload("res://addons/Todo_Manager/UI/ColourPicker.tscn")
-const Pattern := preload("res://addons/Todo_Manager/UI/Pattern.tscn")
-const DEFAULT_PATTERNS := [["\\bTODO\\b", Color("96f1ad"), CASE_INSENSITIVE], ["\\bHACK\\b", Color("d5bc70"), CASE_INSENSITIVE], ["\\bFIXME\\b", Color("d57070"), CASE_INSENSITIVE]]
+const Todo := preload("./todo_class.gd")
+const TodoItem := preload("./todoItem_class.gd")
+const ColourPicker := preload("./UI/ColourPicker.tscn")
+const Pattern := preload("./UI/Pattern.tscn")
+const DEFAULT_PATTERNS := [
+	["INFO", Color("96f1ad"), CASE_INSENSITIVE],	# Godot Comment Markers: Notice Keywords
+	["NOTE", Color("96f1ad"), CASE_INSENSITIVE],
+	["NOTICE", Color("96f1ad"), CASE_INSENSITIVE],
+	["TEST", Color("96f1ad"), CASE_INSENSITIVE],
+	["TESTING", Color("96f1ad"), CASE_INSENSITIVE],
+	
+	["BUG", Color("d5bc70"), CASE_INSENSITIVE],		# Godot Comment Markers: Warning Keywords
+	["DEPRECATED", Color("d5bc70"), CASE_INSENSITIVE],
+	["FIXME", Color("d5bc70"), CASE_INSENSITIVE],
+	["HACK", Color("d5bc70"), CASE_INSENSITIVE],
+	["TASK", Color("d5bc70"), CASE_INSENSITIVE],
+	["TBD", Color("d5bc70"), CASE_INSENSITIVE],
+	["TODO", Color("d5bc70"), CASE_INSENSITIVE],
+	["WARNING", Color("d5bc70"), CASE_INSENSITIVE],
+	
+	["ALERT", Color("d57070"), CASE_INSENSITIVE],	# Godot Comment Markers: Critical Keywords
+	["ATTENTION", Color("d57070"), CASE_INSENSITIVE],
+	["CAUTION", Color("d57070"), CASE_INSENSITIVE],
+	["CRITICAL", Color("d57070"), CASE_INSENSITIVE],
+	["DANGER", Color("d57070"), CASE_INSENSITIVE],
+	["SECURITY", Color("d57070"), CASE_INSENSITIVE],
+	]
 const DEFAULT_SCRIPT_COLOUR := Color("ccced3")
 const DEFAULT_SCRIPT_NAME := false
 const DEFAULT_SORT := true
@@ -36,8 +58,8 @@ var patterns := [["\\bTODO\\b", Color("96f1ad"), CASE_INSENSITIVE], ["\\bHACK\\b
 @onready var project_tree := $VBoxContainer/TabContainer/Project/Tree as Tree
 @onready var current_tree := $VBoxContainer/TabContainer/Current/Tree as Tree
 @onready var settings_panel := $VBoxContainer/TabContainer/Settings as Panel
-@onready var colours_container := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/Colours as VBoxContainer
-@onready var pattern_container := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Patterns as VBoxContainer
+@onready var colours_container := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3/Colours as VFlowContainer
+@onready var pattern_container := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Patterns as VFlowContainer
 @onready var ignore_textbox := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/VBoxContainer/HBoxContainer2/Scripts/IgnorePaths/TextEdit as LineEdit
 @onready var auto_refresh_button := $VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer5/Patterns/RefreshCheckButton as CheckButton
 
@@ -181,12 +203,12 @@ func create_config_file() -> void:
 	config.set_value("config", "auto_refresh", auto_refresh)
 	config.set_value("config", "builtin_enabled", builtin_enabled)
 	
-	var err = config.save("res://addons/Todo_Manager/todo.cfg")
+	var err = config.save(self.get_script().resource_path.get_base_dir()+"/todo.cfg")
 
 
 func load_config() -> void:
 	var config := ConfigFile.new()
-	if config.load("res://addons/Todo_Manager/todo.cfg") == OK:
+	if config.load(self.get_script().resource_path.get_base_dir()+"/todo.cfg") == OK:
 		full_path = config.get_value("scripts", "full_path", DEFAULT_SCRIPT_NAME)
 		_sort_alphabetical = config.get_value("scripts", "sort_alphabetical", DEFAULT_SORT)
 		script_colour = config.get_value("scripts", "script_colour", DEFAULT_SCRIPT_COLOUR)

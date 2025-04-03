@@ -55,12 +55,14 @@ text = "Settings"
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+current_tab = 0
 
 [node name="Project" type="Panel" parent="VBoxContainer/TabContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("2")
+metadata/_tab_index = 0
 
 [node name="Tree" type="Tree" parent="VBoxContainer/TabContainer/Project"]
 layout_mode = 1
@@ -77,6 +79,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3")
+metadata/_tab_index = 1
 
 [node name="Tree" type="Tree" parent="VBoxContainer/TabContainer/Current"]
 layout_mode = 1
@@ -91,6 +94,7 @@ hide_root = true
 [node name="Settings" type="Panel" parent="VBoxContainer/TabContainer"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Settings"]
 layout_mode = 1
@@ -215,8 +219,11 @@ layout_mode = 2
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
 
-[node name="Colours" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+[node name="Colours" type="VFlowContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 70
 
 [node name="Patterns" type="HBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -235,9 +242,11 @@ layout_mode = 2
 [node name="VSeparator" type="VSeparator" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
 layout_mode = 2
 
-[node name="Patterns" type="VBoxContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+[node name="Patterns" type="VFlowContainer" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(0, 450)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/h_separation = 40
 
 [node name="AddPatternButton" type="Button" parent="VBoxContainer/TabContainer/Settings/ScrollContainer/MarginContainer/VBoxContainer/HBoxContainer4/Patterns"]
 layout_mode = 2

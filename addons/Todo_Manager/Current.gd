@@ -3,8 +3,8 @@ extends Panel
 
 signal tree_built # used for debugging
 
-const Todo := preload("res://addons/Todo_Manager/todo_class.gd")
-const TodoItem := preload("res://addons/Todo_Manager/todoItem_class.gd")
+const Todo := preload("./todo_class.gd")
+const TodoItem := preload("./todoItem_class.gd")
 
 var _sort_alphabetical := true
 
